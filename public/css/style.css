@@ -1,21 +1,22 @@
+/* Texte */
+
 h1
 {
     font-family: 'Balsamiq Sans', cursive;
 }
 
-.btn-info
+.admin
 {
-    background-color: #e3cfd8!important;
-    border: none !important;
+    text-align: center;
 }
 
-.btn-success
+.admin
 {
-    background-color: #d9f2d9 !important;
-    border: none !important;
+    text-align: center;
 }
 
 
+/* Image */
 .imageCarousel
 {
     height:600px ;
@@ -29,7 +30,54 @@ h1
     height: 500px;
 }
 
-.admin
+.imageCard
 {
-    text-align: center;
+    height:300px;
+    object-fit: cover;
 }
+
+/* Boutons */
+
+.btn
+{
+    box-shadow: none !important;
+
+}
+.btn-primary
+{
+    background-color: #78c2ad !important;
+    border: none !important;
+    
+}
+
+.btn-primary:hover
+{
+    background-color: #68b6a0 !important;
+}
+
+.btn-secondary
+{
+    background-color: #f3969a!important;
+    border: none !important;
+}
+
+.btn-secondary:hover
+{
+    background-color: #fc7a81!important;
+}
+
+.btn-success
+{
+    background-color: #56cc9d !important;
+    border: none !important;
+    
+}
+
+.btn-success:hover
+{
+    background-color: #3cb383 !important;
+}
+
+
+
+

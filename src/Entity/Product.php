@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\ProductRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: ProductRepository::class)]
 class Product
@@ -16,12 +17,15 @@ class Product
     
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Assert\NotBlank(message: 'Le champs nom est requis.')]
     private $name;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Assert\NotBlank(message: 'Le champs image est requis.')]
     private $image;
 
     #[ORM\Column(type: 'integer')]
+    #[Assert\NotBlank(message: 'Le champs prix est requis.')]
     private $prix;
 
     #[ORM\ManyToOne(targetEntity: Category::class, inversedBy: 'products')]

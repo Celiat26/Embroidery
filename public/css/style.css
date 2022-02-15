@@ -1,8 +1,8 @@
 /* Texte */
 
-h1
+h1,h2,h3,h4,h5,h6
 {
-    font-family: 'Balsamiq Sans', cursive;
+    font-family: 'Amatic SC', cursive;
 }
 
 .admin
@@ -36,6 +36,11 @@ h1
     object-fit: cover;
 }
 
+.imageDetail
+{
+    height:400px;
+    object-fit: cover;
+} 
 /* Boutons */
 
 .btn
@@ -79,5 +84,7 @@ h1
 }
 
 
-
-
+.bg-white
+{
+    background-color: #fae5d7 !important;
+}

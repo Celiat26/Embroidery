@@ -15,10 +15,33 @@
         <li class="nav-item">
           <a class="nav-link" href="{{ path('contact') }}">Contact</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{{ path('admin') }}">Administration</a>
-        </li>
-       
+
+      {% if app.user  %}
+
+        {% if app.user.roles[0] is same as "ROLE_ADMIN" %}
+
+          <li class="nav-item">
+              <a class="nav-link" href="{{ path('admin') }}">Administration</a>
+            </li>
+
+        {% endif %}
+
+          <li class="nav-item">
+            <a class="nav-link" href="{{ path('app_logout') }}">Deconnexion</a>
+          </li>
+
+      {% else %}
+
+          <li class="nav-item">
+            <a class="nav-link" href="{{ path('app_login') }}">Connexion</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="{{ path('app_register') }}">Inscription</a>
+          </li>
+        
+        {% endif %}
+
       </ul>
       <form class="d-flex">
         <input class="form-control me-2" type="search" placeholder="Que cherchez-vous ?" aria-label="Search">

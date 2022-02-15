@@ -3,9 +3,12 @@
 {% block title %}Administration{% endblock %}
 
 {% block body %}
+
 <div>
     <img class="imageAdministration" src="https://images.unsplash.com/photo-1629442214769-c4f01458bf04?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt=""><h1 class="admin">Administration</h1>
 </div>
+
+
 <div class="container py-5">
     <div class="row">
         <div class="col-4">
@@ -22,6 +25,26 @@
                 </div>
             </div>
         </div>
+        <div class="col-4">
+            <div class="card">
+                <div class="card-body">
+                <div class="card-body">
+                    <img src="https://images.unsplash.com/photo-1624823246174-069e1622c032?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MzR8fGVtYnJvaWRlcnl8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60" alt="" class="w-100 imageCard">
+                </div>
+                    <h5 class="card-title">Produits</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">Les produits de broderie</h6>
+                    <p class="card-text">Liste et ajout de produits</p>
+                    <a href="{{ path('product_index') }}" class="btn btn-secondary">Liste</a>
+                    <a href="{{ path('product_new') }}" class="btn btn-primary ">Ajout</a>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
+
+
+
+
+
+
 {% endblock %}

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Customer;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -11,7 +11,7 @@ class ContactController extends AbstractController
     #[Route('/prendrecontact', name: 'contact')]
     public function index(): Response
     {
-        return $this->render('contact/index.html.twig', [
+        return $this->render('customer/contact/index.html.twig', [
             'controller_name' => 'ContactController',
         ]);
     }

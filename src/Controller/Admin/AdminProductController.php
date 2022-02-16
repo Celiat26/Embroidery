@@ -13,9 +13,9 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('/admin/product')]
-class ProductController extends AbstractController
+class AdminProductController extends AbstractController
 {
-    #[Route('/', name: 'product_index', methods: ['GET'])]
+    #[Route('/', name: 'admin_product_index', methods: ['GET'])]
     public function index(ProductRepository $productRepository, PaginatorInterface $paginator, Request $request): Response
     {
         $products = $paginator->paginate(
@@ -24,12 +24,12 @@ class ProductController extends AbstractController
             3 
         );
 
-        return $this->render('product/index.html.twig', [
+        return $this->render('admin/product/index.html.twig', [
             'products' => $products,
         ]);
     }
 
-    #[Route('/new', name: 'product_new', methods: ['GET', 'POST'])]
+    #[Route('/new', name: 'admin_product_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $product = new Product();
@@ -40,24 +40,24 @@ class ProductController extends AbstractController
             $entityManager->persist($product);
             $entityManager->flush();
 
-            return $this->redirectToRoute('product_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('admin_product_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('product/new.html.twig', [
+        return $this->renderForm('admin/product/new.html.twig', [
             'product' => $product,
             'form' => $form,
         ]);
     }
 
-    #[Route('/{id}', name: 'product_show', methods: ['GET'])]
+    #[Route('/{id}', name: 'admin_product_show', methods: ['GET'])]
     public function show(Product $product): Response
     {
-        return $this->render('product/show.html.twig', [
+        return $this->render('admin/product/show.html.twig', [
             'product' => $product,
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'product_edit', methods: ['GET', 'POST'])]
+    #[Route('/{id}/edit', name: 'admin_product_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Product $product, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(ProductType::class, $product);
@@ -66,16 +66,16 @@ class ProductController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
-            return $this->redirectToRoute('product_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('admin_product_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('product/edit.html.twig', [
+        return $this->renderForm('admin/product/edit.html.twig', [
             'product' => $product,
             'form' => $form,
         ]);
     }
 
-    #[Route('/{id}', name: 'product_delete', methods: ['POST'])]
+    #[Route('/{id}', name: 'admin_product_delete', methods: ['POST'])]
     public function delete(Request $request, Product $product, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$product->getId(), $request->request->get('_token'))) {
@@ -83,6 +83,6 @@ class ProductController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('product_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('admin_product_index', [], Response::HTTP_SEE_OTHER);
     }
 }

@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'admin/base_admin.html.twig' %}
 
 {% block title %}Administration{% endblock %}
 
@@ -20,8 +20,8 @@
                     <h5 class="card-title">Catégories</h5>
                     <h6 class="card-subtitle mb-2 text-muted">Les catégories de produits</h6>
                     <p class="card-text">Liste et ajout de catégories</p>
-                    <a href="{{ path('category_index') }}" class="btn btn-secondary">Liste</a>
-                    <a href="{{ path('category_new') }}" class="btn btn-primary ">Ajout</a>
+                    <a href="{{ path('admin_category_index') }}" class="btn btn-secondary">Liste</a>
+                    <a href="{{ path('admin_category_new') }}" class="btn btn-primary ">Ajout</a>
                 </div>
             </div>
         </div>
@@ -34,8 +34,8 @@
                     <h5 class="card-title">Produits</h5>
                     <h6 class="card-subtitle mb-2 text-muted">Les produits de broderie</h6>
                     <p class="card-text">Liste et ajout de produits</p>
-                    <a href="{{ path('product_index') }}" class="btn btn-secondary">Liste</a>
-                    <a href="{{ path('product_new') }}" class="btn btn-primary ">Ajout</a>
+                    <a href="{{ path('admin_product_index') }}" class="btn btn-secondary">Liste</a>
+                    <a href="{{ path('admin_product_new') }}" class="btn btn-primary ">Ajout</a>
                 </div>
             </div>
         </div>

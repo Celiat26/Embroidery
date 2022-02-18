@@ -41,6 +41,14 @@ h1,h2,h3,h4,h5,h6
     height:400px;
     object-fit: cover;
 } 
+
+.imageProductCart
+{
+    height: 50px;
+    width: 50px;
+    object-fit: cover;
+}
+
 /* Boutons */
 
 .btn

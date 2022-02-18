@@ -4,6 +4,7 @@
 <div class="container py-5">
 
     <div class="row">
+         {% include "_messages_flash.html.twig" %}
         <div class="col-6">
             <div class="card">
   <img src="{{ product.image }}" class="rounded-3 imageDetail" alt="...">
@@ -11,7 +12,7 @@
     <h3 class="card-title">{{ product.name }}</h3>
     <p class="card-text">Prix : {{ product.prix | priceFormatEuro}}</p>
     <p class="card-text">Catégorie : {{ product.category.name}}</p>
-    <a href="#" class="btn btn-primary w-100">Ajouter au panier</a>
+    <a href="{{ path('cart_add', {'id': product.id}) }}" class="btn btn-primary w-100">Ajouter au panier <i class="fa-solid fa-basket-shopping"></i></a>
   </div>
 </div>
     </div>

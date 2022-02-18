@@ -7,7 +7,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Boutique</a>
+          <a class="nav-link active" aria-current="page" href="{{ path('home') }}"><i class="fa-solid fa-shop"></i> Boutique</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">Qui je suis ?</a>
@@ -28,6 +28,10 @@
 
           <li class="nav-item">
             <a class="nav-link" href="{{ path('app_logout') }}">Deconnexion</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="{{ path('cart_detail') }}"><i class="fa-solid fa-basket-shopping"></i> Mon panier</a>
           </li>
 
       {% else %}

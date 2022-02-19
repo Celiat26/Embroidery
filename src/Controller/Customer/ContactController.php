@@ -1,18 +1,39 @@
-<?php
+<?php 
 
 namespace App\Controller\Customer;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Response;
+use App\Form\ContactType;
+use App\Services\MailerService;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class ContactController extends AbstractController
 {
-    #[Route('/prendrecontact', name: 'contact')]
-    public function index(): Response
+    #[Route('/contact', name: 'contact')]
+    public function contact(Request $request,MailerService $mailerService)
     {
-        return $this->render('customer/contact/index.html.twig', [
-            'controller_name' => 'ContactController',
+        $form = $this->createForm(ContactType::class);
+
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid())
+        {
+            $emailCustomer = $form->get('email_customer')->getData();
+
+            $content = $form->get('content')->getData();
+
+            $mailerService->sendContactMail($emailCustomer,$content);
+
+            $this->addFlash("success","Votre message a bien été pris en compte.");
+
+            return $this->redirectToRoute("contact");
+           
+        }
+
+        return $this->render("contact/contact.html.twig",[
+            "form" => $form->createView()
         ]);
+
     }
 }

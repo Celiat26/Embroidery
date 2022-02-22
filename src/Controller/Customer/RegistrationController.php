@@ -3,18 +3,20 @@
 namespace App\Controller\Customer;
 
 use App\Entity\User;
+use App\Services\HandleImage;
 use App\Form\RegistrationFormType;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class RegistrationController extends AbstractController
 {
     #[Route('/register', name: 'app_register')]
-    public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
+    public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager, HandleImage $handleImage): Response
     {
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
@@ -22,6 +24,20 @@ class RegistrationController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             // encode the plain password
+
+            /** @var UploadedFile $file */
+            $file = $form->get('fileAvatar')->getData();
+
+             /** @var UploadedFile $file */
+             $file2 = $form->get('fileCouverture')->getData();
+        
+        
+            if($file && $file2)
+            {
+                $handleImage->save($file,$user, 1);
+                $handleImage->save($file2,$user, 2);
+            }
+
             $user->setPassword(
             $userPasswordHasher->hashPassword(
                     $user,

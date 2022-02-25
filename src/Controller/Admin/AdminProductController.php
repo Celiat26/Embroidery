@@ -4,7 +4,9 @@ namespace App\Controller\Admin;
 
 use App\Entity\Product;
 use App\Form\ProductType;
+use App\Search\SearchProduct;
 use App\Services\HandleImage;
+use App\Form\SearchProductType;
 use App\Repository\ProductRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
@@ -20,15 +22,28 @@ class AdminProductController extends AbstractController
     #[Route('/', name: 'admin_product_index', methods: ['GET'])]
     public function index(ProductRepository $productRepository, PaginatorInterface $paginator, Request $request): Response
     {
+        $search = new SearchProduct();
+
+        $form = $this->createForm(SearchProductType::class,$search);
+
+        $form->handleRequest($request);
+
+        $products = $productRepository->findByFilter($search);
+
         $products = $paginator->paginate(
-            $productRepository->findAll(), 
+            $productRepository->findByFilter($search), 
             $request->query->getInt('page', 1), 
             3 
         );
 
         return $this->render('admin/product/index.html.twig', [
             'products' => $products,
+            'form' => $form->createView()
         ]);
+
+       
+
+        
     }
 
     #[Route('/new', name: 'admin_product_new', methods: ['GET', 'POST'])]
@@ -46,7 +61,7 @@ class AdminProductController extends AbstractController
             
             if($file)
             {
-                $handleImage->save($file,$product);
+                $handleImage->save($file,$product,0);
             }
 
             $entityManager->persist($product);

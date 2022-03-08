@@ -16,7 +16,7 @@ class StripeController extends AbstractController
     {
         Stripe::setApiKey('sk_test_51IBjOmJxItuCvN48kVDdR9Tg52Npf4IJydX0TFxyioJFxo5vdlObzoYYTmiVZ2BD2XqGQkvsWaj8UNNzEz3ekgMo00jPcW004c');
 
-        $domain = 'http://localhost:8000';
+        $domain = 'http://localhost:8000/';
 
         /** @var CartRealProduct[] $detailCart */
         $detailCart = $cartService->detail();
@@ -52,8 +52,8 @@ class StripeController extends AbstractController
                 $productForStripe
             ],
             'mode' => 'payment',
-              'success_url' => $domain . '/paiementreussi',
-              'cancel_url' => $domain . '/paiementechoue',
+              'success_url' => $domain . 'paiementreussi',
+              'cancel_url' => $domain . 'paiementechoue',
           ]);
 
           return $this->redirect($checkout_session->url);

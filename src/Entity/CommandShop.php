@@ -25,7 +25,7 @@ class CommandShop
     private $createdAt;
 
     #[ORM\Column(type: 'boolean')]
-    private $isPayed;
+    private $isPayed = false;
 
     #[ORM\Column(type: 'integer')]
     private $totalPrice;

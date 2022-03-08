@@ -3,23 +3,22 @@
 {% block body %}
 
 <div class="container py-5">
-    <div class="row align-items-center justify-content-center">
+    <div class="row ">
         <div class="col-12">
             <h3 class="text-center">
-                Mon panier
+                Récapitulatif de ma commande
             </h3>
-            
         </div>
 
         
         {% include "_messages_flash.html.twig" %}
       
 
-        <div class="col-sm-12 col-md-10 col-lg-8 mt-3">
+        <div class="col-sm-12 col-md-6 mt-3">
 
             <div class="card">
                 <div class="card-body">
-                    {% if cart | length > 0 %}
+                
 
                         <div class="table-responsive">
                             <table class="table table-hover">
@@ -39,15 +38,12 @@
                                                     <img src=" {{ item.product.image }}" alt="{{ item.product.name }}" class="imageProductCart">
                                                     <div class="d-flex flex-column align-items-center justify-content-center">
                                                         <p>{{ item.product.name }}</p>
-                                                        <a class="btn btn-link text-danger btn-sm" href="{{ path('cart_remove',{'id' : item.product.id }) }}"><i class="fas fa-trash"></i> Supprimer</a>
                                                     </div>
                                                 </div>
                                             </td>
                                             <td>{{ item.product.prix | priceFormatEuro }}</td>
                                             <td>
-                                                <a class="btn btn-dark" href="{{ path('cart_decrement',{'id': item.product.id}) }}"><i class="fas fa-minus-circle"></i></a>
                                                 <button class="btn btn-light">{{ item.qty }}</button>
-                                                <a class="btn btn-dark" href="{{ path('cart_add',{'id': item.product.id}) }}?returnToCart=true"><i class="fas fa-plus-circle"></i></a>
                                             </td>
                                             <td>{{ item.total | priceFormatEuro }}</td>
                                         </tr>
@@ -61,23 +57,41 @@
                             </table>
                         </div>
 
-                        <div class="d-flex justify-content-between">
-                            <a href="{{ path('home') }}" class="btn btn-dark"><i class="fa-solid fa-arrow-left"></i> Continuer mes achats</a>
-                            <a href="{{ path('command_recap') }}" class="btn btn-primary"> Valider mon panier <i class="fa-solid fa-check"></i></a>
-                             
-                        </div>
-                        
-
-                    {% else %}
-                        <p>Le panier est vide.</p>
-                        <br/>
-                        <a href="{{ path('home') }}" class="btn btn-dark"><i class="fa-solid fa-arrow-left"></i> Continuer mes achats</a>
-                    {% endif  %}
+    
+                </div>
+                <div class="card-footer">
+                    <a href="{{ path('cart_detail') }}" class="btn-btn-secondary">Modifier mon panier</a>
                 </div>
             </div>
 
         </div>
+        <div class="col-sm-12 col-md-6 mt-3">
+            <div class="card">
+                <div class="card-header">
+                    <h3>Adresse de livraison</h3>
+                </div>
+                <div class="card-body">
+                    {{ form_start(form) }}
+                    {{ form_widget(form) }}
+                    <button type="submit" class="btn btn-success mt-3 w-100" id="buttonSubmit">Valider l'adresse et payer la commande</button>
+                    <button class="btn btn-success mt-3 w-100" type="button" disabled id="buttonSpinner" style="display:none;">
+                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                        Redirection vers stripe en cours...
+                    </button>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+            
+        </div>
     </div>
 </div>
 
+<script>
+    const buttonSubmit = document.getElementById('buttonSubmit');
+    const buttonSpinner = document.getElementById('buttonSpinner');
+       buttonSubmit.addEventListener('click', () => {
+        buttonSubmit.style.display = 'none';
+        buttonSpinner.style.display = 'initial';
+    });
+</script>
 {% endblock %}

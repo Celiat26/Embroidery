@@ -31,7 +31,7 @@ class DeliveryAddress
     private $postalCode;
 
     #[ORM\Column(type: 'string', length: 255)]
-    #[Assert\NotBlank(message: 'Les informations de la rue sont requises')]
+    #[Assert\NotBlank(message: 'Les informations sont requises')]
     private $street;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
